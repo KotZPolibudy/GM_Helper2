@@ -25,21 +25,7 @@ export default function HeroStack () {
         }} />
 
 
-        <Stack.Screen name="[id]" options={{ headerRight: () => (
-            <Link href="/(admin)/lista_postaci/create" asChild>
-              <Pressable>
-                {({ pressed }) => (
-                  <FontAwesome
-                    name="pencil"
-                    size={25}
-                    color={Colors.light.tint}
-                    style={{ marginRight: 15, opacity: pressed ? 0.5 : 1 }}
-                  />
-                )}
-              </Pressable>
-            </Link>
-          ), 
-        }} />
+        
 
 
     </Stack>

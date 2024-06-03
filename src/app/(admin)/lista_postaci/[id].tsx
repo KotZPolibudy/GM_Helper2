@@ -1,10 +1,11 @@
-import { Stack, useLocalSearchParams } from 'expo-router';
-import { View, Text, StyleSheet, Image, Dimensions } from 'react-native';
+import { Stack, useLocalSearchParams, Link } from 'expo-router';
+import { View, Text, StyleSheet, Image, Dimensions, Pressable } from 'react-native';
 import Colors from '@/constants/Colors';
 import heroes from '@assets/data/heroes';
 import heroImages from '@assets/heroImages';
 import { defaultHeroImage } from '@/components/HeroListItem';
 import Button from '@/components/Button';
+import { FontAwesome } from '@expo/vector-icons';
 
 const screenWidth = Dimensions.get('window').width;
 
@@ -26,7 +27,29 @@ const HeroDetailsScreen = () => {
 
     return (
         <View style={styles.pageContainer}>
-            <Stack.Screen options={{ title: 'Szczegóły - ' + hero.name }} />
+
+            <Stack.Screen options={{ 
+                title: 'Szczegóły - ' + hero.name,
+                headerRight: () => (
+            <Link href={`/(admin)/lista_postaci/create?id=${id}`} asChild>
+              <Pressable>
+                {({ pressed }) => (
+                  <FontAwesome
+                    name="pencil"
+                    size={25}
+                    color={Colors.light.tint}
+                    style={{ marginRight: 15, opacity: pressed ? 0.5 : 1 }}
+                  />
+                )}
+              </Pressable>
+            </Link>
+          ), 
+        }} />
+
+        
+
+
+
             
             <View style={styles.container}>
                 <Image style={styles.image} source={heroImage} resizeMode="cover" />

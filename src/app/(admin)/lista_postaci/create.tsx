@@ -1,10 +1,10 @@
 import Button from '@/components/Button';
 import { useState } from 'react';
-import {View, Text, StyleSheet, Image, TextInput, ScrollView} from 'react-native';
+import {View, Text, StyleSheet, Image, TextInput, ScrollView, Alert} from 'react-native';
 import { defaultHeroImage } from '@/components/HeroListItem';
 import Colors from '@/constants/Colors';
 import * as ImagePicker from 'expo-image-picker';
-import { Stack } from 'expo-router';
+import { Stack, useLocalSearchParams } from 'expo-router';
 
 const CreateHeroScreen = () => {
 
@@ -15,6 +15,12 @@ const CreateHeroScreen = () => {
     const [backstory, setBackstory] = useState('');
     const [errors, setErrors] = useState('');
     const [image, setImage] = useState<string | null> ('');
+
+    const {id} = useLocalSearchParams();
+    const isUpdating = !!id;
+
+
+    //if isUpdating -> wypełnić pola 
 
 
     const resetFields = () => {
@@ -59,6 +65,41 @@ const CreateHeroScreen = () => {
         return true;
     }
 
+    const onUpdate = () => {
+        if (!validateInput()) {
+            return;
+        }
+        console.warn('Updated a hero!', {name});
+
+        resetFields();
+    }
+
+    const onSubmit = () => {
+        if (isUpdating){
+            onUpdate();
+        } else {
+            onCreate();
+        }
+    }
+
+
+    const onDelete = () => {
+        console.warn('USUWAMYY!')
+    }
+
+    const confirmDelete = () => {
+        Alert.alert('Potwierdź', 'Czy na pewno chcesz usunąć te postać?', [
+            {
+                text: 'Nie',
+            },
+            {
+                text: "Usuń",
+                style: 'destructive',
+                onPress: onDelete,
+            }
+        ])
+    }
+
 
     const pickImage = async () => {
         // No permissions request is necessary for launching the image library
@@ -79,7 +120,7 @@ const CreateHeroScreen = () => {
 
     return (
         <ScrollView>
-            <Stack.Screen options={{ title: "Dodaj postać"}} />
+            <Stack.Screen options={{ title: isUpdating ? "Edytuj Postać" : "Dodaj postać"}} />
 
             <View style={styles.imagecontainer}>
                 <Image source={image ? { uri: image } : defaultHeroImage}  style={styles.image} resizeMode="contain" />
@@ -123,7 +164,9 @@ const CreateHeroScreen = () => {
 
             <Text style = {{ color: 'red'}}>{errors}</Text>
 
-            <Button text='Stwórz' onPress={onCreate} />
+            <Button text={ isUpdating ? "Zatwierdź zmiany" : 'Stwórz postać'} onPress={onCreate} />
+
+            {isUpdating && <Text onPress={confirmDelete} style={styles.textButton}>Usuń postać</Text>}
 
             <View style={styles.separator}/>
 
