@@ -9,7 +9,7 @@ export default function HeroStack () {
     <Stack screenOptions={{  }}>
 
         <Stack.Screen name="index" options={{ title: 'Lista postaci', headerRight: () => (
-            <Link href="/" asChild>
+            <Link href="/(admin)/lista_postaci/create" asChild>
               <Pressable>
                 {({ pressed }) => (
                   <FontAwesome
@@ -26,7 +26,7 @@ export default function HeroStack () {
 
 
         <Stack.Screen name="[id]" options={{ headerRight: () => (
-            <Link href="/" asChild>
+            <Link href="/(admin)/lista_postaci/create" asChild>
               <Pressable>
                 {({ pressed }) => (
                   <FontAwesome
