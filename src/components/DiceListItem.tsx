@@ -17,11 +17,11 @@ const DiceListItem = ({ die }: DiceListItemProps) => {
     const [fudgeResults, setFudgeResults] = useState<number[]>([]);
 
     const rollMe = () => {
-        if (die.name == 'dF') {
+        if (die.name == 'DF') {
             const results = Array.from({ length: 4 }, () => Math.floor(Math.random() * 3) - 1); 
+            const sum = results.reduce((acc, val) => acc + val, 0);
             setFudgeResults(results);
-            Alert.alert(`Rolled dF: ${results[0]}, ${results[1]}, ${results[2]}, ${results[3]} `);
-            //to jeszcze wymaga dopracowania
+            Alert.alert(`Rolled dF: ${results[0]}, ${results[1]}, ${results[2]}, ${results[3]} \n Sum: ${sum}`);
         } else {
             const min = 1;
             const max = die.range;
@@ -29,6 +29,7 @@ const DiceListItem = ({ die }: DiceListItemProps) => {
             Alert.alert(`Rolled a ${randomNumber}`);
         }
     }
+    
 
     return (
         <Pressable style={styles.container} onPress={rollMe}>
@@ -59,7 +60,7 @@ const styles = StyleSheet.create({
     },
     image: {
         width: '100%',
-        height: 200, // Fixed height for the images
+        height: 130, // Fixed height for the images
         borderRadius: 10,
     }
 });
