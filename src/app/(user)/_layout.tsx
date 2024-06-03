@@ -72,6 +72,15 @@ export default function TabLayout() {
         }}
       />
 
+<Tabs.Screen
+        name="punkty"
+        options={{
+          title: 'punkty',
+          headerShown: false,
+          tabBarIcon: ({ color }) => <TabBarIcon name="dollar" color={color} />,
+        }}
+      />
+
 
 
 
