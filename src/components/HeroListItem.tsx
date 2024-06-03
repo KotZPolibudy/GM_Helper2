@@ -2,7 +2,7 @@ import { StyleSheet, Text, View, Image, Dimensions, Pressable } from 'react-nati
 import Colors from '@/constants/Colors';
 import { Hero } from '@/types';
 import heroImages from '@assets/heroImages';
-import { Link } from 'expo-router';
+import { Link, useSegments } from 'expo-router';
 
 type HeroListItemProps = {
     hero: Hero,
@@ -14,8 +14,9 @@ const screenWidth = Dimensions.get('window').width;
 
 const HeroListItem = ({ hero }: HeroListItemProps) => {
     const heroImage = hero.image ? heroImages[hero.image] || defaultHeroImage : defaultHeroImage;
+    const segments = useSegments();
     return (
-        <Link href={`/lista_postaci/${hero.id}`} asChild>
+        <Link href={`${segments[0]}/lista_postaci/${hero.id}`} asChild>
         <Pressable style={styles.container}>
             <Image style={styles.image} source={heroImage} resizeMode="cover" />
             <Text style={styles.title}> {hero.name} </Text>

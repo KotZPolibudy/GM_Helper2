@@ -1,7 +1,9 @@
 import { Stack } from "expo-router";
 
 export default function HeroStack () {
-    return <Stack>
-
-    </Stack>
+    return(
+        <Stack>
+            <Stack.Screen name='index' options={{title: 'Lista Postaci'}}/>
+        </Stack>
+    )
 }
