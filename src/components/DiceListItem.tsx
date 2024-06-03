@@ -1,36 +1,44 @@
-import { StyleSheet, Text, View, Image, Dimensions, Pressable } from 'react-native';
+import { StyleSheet, Text, View, Image, Dimensions, Pressable, Alert } from 'react-native';
 import Colors from '@/constants/Colors';
-import dice from '@assets/data/dice';
-import { Link, useSegments } from 'expo-router';
+import diceImages from '@assets/diceImages';
 import { Die } from '@/types';
-import diceImages from '@assets/dice_Images';
+import { useState } from 'react';
 
-type HeroListItemProps = {
+type DiceListItemProps = {
     die: Die,
 }
- // needs work
+
 export const defaultDieImage = require('@assets/dice_Images/defaultdice.jpg');
 
 const screenWidth = Dimensions.get('window').width;
 
-const HeroListItem = ({ die }: HeroListItemProps) => {
-    const heroImage = die.image ? diceImages[die.image] || defaultDieImage : defaultDieImage;
-    const segments = useSegments();
+const DiceListItem = ({ die }: DiceListItemProps) => {
+    const dieImage = diceImages[die.image as keyof typeof diceImages] || defaultDieImage;
+    const [fudgeResults, setFudgeResults] = useState<number[]>([]);
 
-    const rollme = () => {
-
-    } 
+    const rollMe = () => {
+        if (die.name == 'dF') {
+            const results = Array.from({ length: 4 }, () => Math.floor(Math.random() * 3) - 1); 
+            setFudgeResults(results);
+            Alert.alert(`Rolled dF: ${results[0]}, ${results[1]}, ${results[2]}, ${results[3]} `);
+            //to jeszcze wymaga dopracowania
+        } else {
+            const min = 1;
+            const max = die.range;
+            const randomNumber = Math.floor(Math.random() * (max - min + 1)) + min;
+            Alert.alert(`Rolled a ${randomNumber}`);
+        }
+    }
 
     return (
-        <Pressable style={styles.container} onPress={rollme}>
-            <Image style={styles.image} source={heroImage} resizeMode="cover" />
-            <Text style={styles.title}> {die.name} </Text>
-            <Text style={styles.level}>Level: {die.range} </Text>
+        <Pressable style={styles.container} onPress={rollMe}>
+            <Image style={styles.image} source={dieImage} resizeMode="cover" />
+            <Text style={styles.title}>{die.name}</Text>
         </Pressable>
     );
 }
 
-export default HeroListItem;
+export default DiceListItem;
 
 const styles = StyleSheet.create({
     container: {
@@ -42,17 +50,12 @@ const styles = StyleSheet.create({
         marginVertical: 10,
         marginHorizontal: 10,
         width: screenWidth - 40, // Adjust container width
+        flex: 1,
     },
     title: {
         fontSize: 20,
         fontWeight: 'bold',
         marginTop: 10,
-    },
-    level: {
-        fontSize: 16,
-        fontWeight: '700',
-        color: Colors.light.tint,
-        marginTop: 5,
     },
     image: {
         width: '100%',

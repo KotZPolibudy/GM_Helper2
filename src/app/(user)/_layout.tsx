@@ -64,11 +64,11 @@ export default function TabLayout() {
       />
 
       <Tabs.Screen
-        name="kostki"
+        name="kostki/index"
         options={{
           title: 'Kostki!',
           headerShown: false,
-          tabBarIcon: ({ color }) => <TabBarIcon name="list" color={color} />,
+          tabBarIcon: ({ color }) => <TabBarIcon name="diamond" color={color} />,
         }}
       />
 

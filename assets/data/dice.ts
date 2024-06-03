@@ -37,7 +37,7 @@ const dice = [
     },
     {
         id: 7,
-        image: 'd100',
+        image: 'd00',
         name: 'D%',
         range: 100,
     },
