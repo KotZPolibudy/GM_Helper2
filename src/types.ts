@@ -45,3 +45,11 @@ export type Profile = {
   id: string;
   group: string;
 };
+
+
+export type Die = {
+  id: number,
+  image: string,
+  name: string,
+  range: number,
+};

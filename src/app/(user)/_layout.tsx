@@ -62,6 +62,20 @@ export default function TabLayout() {
           tabBarIcon: ({ color }) => <TabBarIcon name="list" color={color} />,
         }}
       />
+
+      <Tabs.Screen
+        name="kostki"
+        options={{
+          title: 'Kostki!',
+          headerShown: false,
+          tabBarIcon: ({ color }) => <TabBarIcon name="list" color={color} />,
+        }}
+      />
+
+
+
+
+
     </Tabs>
   );
 }
