@@ -1,8 +1,7 @@
 const heroes = [
   {
     id: 1,
-    image:
-      'https://notjustdev-dummy.s3.us-east-2.amazonaws.com/food/peperoni.png',
+    image: 'kira4.png',
     name: 'Pstryk',
     level: 5,
     backstory: 'dummy-story aaaa',
@@ -10,8 +9,7 @@ const heroes = [
   },
   {
     id: 2,
-    image:
-      'https://notjustdev-dummy.s3.us-east-2.amazonaws.com/food/extravaganzza.png',
+    image: 'kira3.png',
     name: 'Slim',
     level: 10,
     backstory: 'dummy-story bbbb',
