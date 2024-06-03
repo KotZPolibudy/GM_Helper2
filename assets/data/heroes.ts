@@ -1,15 +1,15 @@
 const heroes = [
   {
     id: 1,
-    image: 'kira4.png',
+    image: 'hero1',
     name: 'Pstryk',
     level: 5,
-    backstory: 'dummy-story aaaa',
+    backstory: 'To ten młody kociak co ma za dużo energii. \n A no i odkrył że umie rzucać zaklęcia, to na pewno nie skończy się dobrze...',
     class: 'sorcerer',
   },
   {
     id: 2,
-    image: 'kira3.png',
+    image: 'hero2',
     name: 'Slim',
     level: 10,
     backstory: 'dummy-story bbbb',
@@ -17,8 +17,7 @@ const heroes = [
   },
   {
     id: 3,
-    image:
-      'https://notjustdev-dummy.s3.us-east-2.amazonaws.com/food/peperoni.png',
+    image: null,
       name: 'Koper',
       level: 17,
       backstory: 'dummy-story ccc',
@@ -26,8 +25,7 @@ const heroes = [
   },
   {
     id: 4,
-    image:
-      'https://notjustdev-dummy.s3.us-east-2.amazonaws.com/food/margarita.png',
+    image: 'hero3',
       name: 'dummy-name',
       level: 11,
       backstory: 'dummy-story',
@@ -35,8 +33,7 @@ const heroes = [
   },
   {
     id: 5,
-    image:
-      'https://notjustdev-dummy.s3.us-east-2.amazonaws.com/food/veggie.png',
+    image: null,
       name: 'dummy-name',
       level: 14,
       backstory: 'dummy-story',
@@ -44,8 +41,7 @@ const heroes = [
   },
   {
     id: 6,
-    image:
-      'https://notjustdev-dummy.s3.us-east-2.amazonaws.com/food/hawaiin.png',
+    image: null,
       name: 'dummy-name',
       level: 7,
       backstory: 'dummy-story',
@@ -53,8 +49,7 @@ const heroes = [
   },
   {
     id: 7,
-    image:
-      'https://notjustdev-dummy.s3.us-east-2.amazonaws.com/food/deluxe.png',
+    image: null,
       name: 'dummy-name',
       level: 7,
       backstory: 'dummy-story',
@@ -62,8 +57,7 @@ const heroes = [
   },
   {
     id: 8,
-    image:
-      'https://notjustdev-dummy.s3.us-east-2.amazonaws.com/food/veggie.png',
+    image: null,
       name: 'dummy-name',
       level: 9,
       backstory: 'dummy-story',
@@ -71,8 +65,7 @@ const heroes = [
   },
   {
     id: 9,
-    image:
-      'https://notjustdev-dummy.s3.us-east-2.amazonaws.com/food/extravaganzza.png',
+    image: null,
       name: 'dummy-name',
       level: 18,
       backstory: 'dummy-story',
@@ -80,8 +73,7 @@ const heroes = [
   },
   {
     id: 10,
-    image:
-      'https://notjustdev-dummy.s3.us-east-2.amazonaws.com/food/6cheese.png',
+    image: null,
       name: 'dummy-name',
       level: 20,
       backstory: 'dummy-story',

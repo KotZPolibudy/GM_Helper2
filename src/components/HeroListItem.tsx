@@ -1,8 +1,8 @@
-import { StyleSheet, Text, View, Image } from 'react-native';
-import EditScreenInfo from '@/components/EditScreenInfo';
+import { StyleSheet, Text, View, Image, Dimensions, Pressable } from 'react-native';
 import Colors from '@/constants/Colors';
-import heroes from '@assets/data/heroes';
 import { Hero } from '@/types';
+import heroImages from '@assets/heroImages';
+import { Link } from 'expo-router';
 
 type HeroListItemProps = {
     hero: Hero,
@@ -10,40 +10,48 @@ type HeroListItemProps = {
 
 export const defaultHeroImage = require('@assets/heroimages/default.png');
 
-const HeroListItem = ({hero}: HeroListItemProps) => {
+const screenWidth = Dimensions.get('window').width;
+
+const HeroListItem = ({ hero }: HeroListItemProps) => {
+    const heroImage = hero.image ? heroImages[hero.image] || defaultHeroImage : defaultHeroImage;
     return (
-      <View style={styles.container}>
-  
-        <Image style={styles.image} source={require(`@assets/heroimages/${hero.image}`) || defaultHeroImage} />
-  
-        <Text style={styles.title}> {hero.name} </Text>
-        <Text style={styles.level}>Level: {hero.level} </Text>
-      </View>
+        <Link href={`/lista_postaci/${hero.id}`} asChild>
+        <Pressable style={styles.container}>
+            <Image style={styles.image} source={heroImage} resizeMode="cover" />
+            <Text style={styles.title}> {hero.name} </Text>
+            <Text style={styles.level}>Level: {hero.level} </Text>
+        </Pressable>
+        </Link>
     );
-  }
+}
 
-  export default HeroListItem;
+export default HeroListItem;
 
-  const styles = StyleSheet.create({
+const styles = StyleSheet.create({
     container: {
-      backgroundColor: 'white',
-      padding: 10,
-      borderRadius: 30,
-      //flex: 1,
-      alignItems: 'center',
-      justifyContent: 'center',
+        backgroundColor: 'white',
+        padding: 10,
+        borderRadius: 20,
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginVertical: 10,
+        marginHorizontal: 10,
+        width: screenWidth - 40, // Adjust container width
     },
     title: {
-      fontSize: 20,
-      fontWeight: 'bold',
+        fontSize: 20,
+        fontWeight: 'bold',
+        marginTop: 10,
     },
     level: {
-      fontSize: 16,
-      fontWeight: '700',
-      color: Colors.light.tint,
+        fontSize: 16,
+        fontWeight: '700',
+        color: Colors.light.tint,
+        marginTop: 5,
     },
     image: {
-      height: '55%',
-      aspectRatio: 1,
+        width: '100%',
+        height: 200, // Fixed height for the images
+        borderRadius: 10,
     }
-  });
+});
