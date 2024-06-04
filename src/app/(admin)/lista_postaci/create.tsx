@@ -4,7 +4,8 @@ import {View, Text, StyleSheet, Image, TextInput, ScrollView, Alert} from 'react
 import { defaultHeroImage } from '@/components/HeroListItem';
 import Colors from '@/constants/Colors';
 import * as ImagePicker from 'expo-image-picker';
-import { Stack, useLocalSearchParams } from 'expo-router';
+import { Stack, useLocalSearchParams, useRouter } from 'expo-router';
+import { useInsertHero } from '@/app/api/heroes';
 
 const CreateHeroScreen = () => {
 
@@ -18,6 +19,10 @@ const CreateHeroScreen = () => {
 
     const {id} = useLocalSearchParams();
     const isUpdating = !!id;
+
+    const { mutate: insertHero } = useInsertHero();
+
+    const router = useRouter();
 
 
     //if isUpdating -> wypełnić pola 
@@ -36,6 +41,17 @@ const CreateHeroScreen = () => {
             return;
         }
         console.warn('Created a hero!', {name});
+
+        insertHero({name, level: parseInt(level), image, backstory, clas },
+        {
+            onSuccess: () => {
+                resetFields();
+                router.back();
+            }
+        }
+    
+    
+    );
 
         resetFields();
     }

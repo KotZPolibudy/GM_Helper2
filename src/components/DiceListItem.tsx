@@ -51,6 +51,7 @@ const styles = StyleSheet.create({
         marginVertical: 10,
         marginHorizontal: 10,
         width: screenWidth - 40, // Adjust container width
+        //maxHeight: 170,
         flex: 1,
     },
     title: {

@@ -6,12 +6,14 @@ import heroImages from '@assets/heroImages';
 import { defaultHeroImage } from '@/components/HeroListItem';
 import Button from '@/components/Button';
 import { FontAwesome } from '@expo/vector-icons';
+import { useHero } from '@/app/api/heroes';
 
 const screenWidth = Dimensions.get('window').width;
 
 const HeroDetailsScreen = () => {
-    const { id } = useLocalSearchParams();
-    const hero = heroes.find((p) => p.id.toString() == id);
+    const { id: idString } = useLocalSearchParams();
+    const id = parseFloat(typeof idString == 'string' ? idString : idString[0]);
+    const {data: hero, error, isLoading } = useHero(id);
     
     if (!hero) {
         return <Text>Nie ma takiej postaci</Text>;

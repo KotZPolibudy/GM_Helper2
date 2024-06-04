@@ -65,6 +65,7 @@ const DiceList = () => {
         <Stack.Screen options={{title: 'Rzuć wiaderkiem'}}/>
           <FlatList
               data={dice}
+              numColumns={2}
               keyExtractor={(item) => item.id.toString()}
               renderItem={({ item }) => (
                   <DiceManyListItem

@@ -51,7 +51,7 @@ useEffect(() => {
 
 
     return (
-        <AuthContext.Provider value={{ session, loading, profile, isAdmin: profile?.group === "ADMIN" }}>{children}</AuthContext.Provider>
+        <AuthContext.Provider value={{ session, loading, profile, isAdmin: profile?.group == "ADMIN" }}>{children}</AuthContext.Provider>
     );
 };
 
