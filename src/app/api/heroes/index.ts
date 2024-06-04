@@ -100,3 +100,26 @@ export const useUpdateHero = () => {
 
   })
 }
+
+
+
+export const useDeleteHero = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    async mutationFn(id: number) {
+      await supabase.from('heroes')
+      .delete()
+      .eq('id', id)
+    },
+    async onSuccess() {
+      await queryClient.invalidateQueries(['heroes']);
+    },
+
+    onError (error) {
+      console.warn("Error: ", error.message)
+    }
+
+
+  });
+}
