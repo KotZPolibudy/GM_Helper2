@@ -1,16 +1,20 @@
 import { Stack, useLocalSearchParams } from 'expo-router';
 import { View, Text, StyleSheet, Image, Dimensions } from 'react-native';
 import Colors from '@/constants/Colors';
-import heroes from '@assets/data/heroes';
+//import heroes from '@assets/data/heroes';
 import heroImages from '@assets/heroImages';
 import { defaultHeroImage } from '@/components/HeroListItem';
 import Button from '@/components/Button';
+import { useHero } from '@/app/api/heroes';
 
 const screenWidth = Dimensions.get('window').width;
 
 const HeroDetailsScreen = () => {
-    const { id } = useLocalSearchParams();
-    const hero = heroes.find((p) => p.id.toString() == id);
+    const { id: idString } = useLocalSearchParams();
+
+    const id = parseFloat(typeof idString == 'string' ? idString : idString[0]);
+
+    const {data: hero, error, isLoading } = useHero(id);
     
     if (!hero) {
         return <Text>Nie ma takiej postaci</Text>;
