@@ -42,10 +42,38 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
-        name="two"
+        name="kampanie"
         options={{
           title: 'Kampanie',
+          headerShown: false,
           tabBarIcon: ({ color }) => <TabBarIcon name="list" color={color} />,
+        }}
+      />
+
+      <Tabs.Screen
+        name="kostki/index"
+        options={{
+          title: 'Kostki!',
+          headerShown: false,
+          tabBarIcon: ({ color }) => <TabBarIcon name="diamond" color={color} />,
+        }}
+      />
+
+<Tabs.Screen
+        name="punkty"
+        options={{
+          title: 'punkty',
+          headerShown: false,
+          tabBarIcon: ({ color }) => <TabBarIcon name="dollar" color={color} />,
+        }}
+      />
+
+<Tabs.Screen
+        name="profile"
+        options={{
+          title: 'Profil',
+          headerShown: false,
+          tabBarIcon: ({ color }) => <TabBarIcon name="user" color={color} />,
         }}
       />
     </Tabs>
