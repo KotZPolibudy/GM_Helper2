@@ -64,4 +64,39 @@ const queryClient = useQueryClient();
   })
 }
 
+export const useUpdateHero = () => {
+  const queryClient = useQueryClient();
 
+  return useMutation({
+    async mutationFn(data: any) {
+      const {error, data: newHero} = await supabase
+      .from('heroes')
+      .update({
+        name: data.name,
+        image: data.image,
+        level: data.level,
+        backstory: data.backstory,
+        class: data.class,
+      })
+      .eq('id', data.id)
+      .select()
+      .single();
+
+      if (error) {
+        throw new Error(error.message);
+      }
+      return newHero;
+    },
+
+    async onSuccess(_, {id}) {
+      await queryClient.invalidateQueries(['heroes']);
+      await queryClient.invalidateQueries(['heroes', id]);
+    },
+
+    onError (error) {
+      console.warn("Error: ", error.message)
+    }
+
+
+  })
+}

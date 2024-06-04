@@ -1,11 +1,11 @@
 import Button from '@/components/Button';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import {View, Text, StyleSheet, Image, TextInput, ScrollView, Alert} from 'react-native';
 import { defaultHeroImage } from '@/components/HeroListItem';
 import Colors from '@/constants/Colors';
 import * as ImagePicker from 'expo-image-picker';
 import { Stack, useLocalSearchParams, useRouter } from 'expo-router';
-import { useInsertHero } from '@/app/api/heroes';
+import { useHero, useInsertHero, useUpdateHero } from '@/app/api/heroes';
 
 const CreateHeroScreen = () => {
 
@@ -17,12 +17,28 @@ const CreateHeroScreen = () => {
     const [errors, setErrors] = useState('');
     const [image, setImage] = useState<string | null> ('');
 
-    const {id} = useLocalSearchParams();
+    const {id: idString} = useLocalSearchParams();
+    const id = parseFloat(typeof idString == 'string' ? idString : idString?.[0]);
+
     const isUpdating = !!id;
 
     const { mutate: insertHero } = useInsertHero();
+    const { mutate: updateHero } = useUpdateHero();
+    const {data: updatingHero} = useHero(id);
 
     const router = useRouter();
+
+
+    useEffect(() => {
+if (updatingHero) {
+    setName(updatingHero.name);
+    setLevel(updatingHero.level.toString());
+    setImage(updatingHero.image);
+    setBackstory(updatingHero.backstory);
+    setClas(updatingHero.class);
+
+}
+    }, [updatingHero])
 
 
     //if isUpdating -> wypełnić pola 
@@ -87,7 +103,15 @@ const CreateHeroScreen = () => {
         }
         console.warn('Updated a hero!', {name});
 
-        resetFields();
+        updateHero(
+            { id, name, level: parseInt(level), clas, backstory },
+            {
+            onSuccess: () => {
+                resetFields();
+                router.back();
+            },
+        }
+        );
     }
 
     const onSubmit = () => {
