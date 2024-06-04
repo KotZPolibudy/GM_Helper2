@@ -10,13 +10,14 @@ import { randomUUID } from 'expo-crypto';
 import * as FileSystem from 'expo-file-system';
 import { decode } from 'base64-arraybuffer';
 import { supabase } from '@/lib/supabase';
+import RemoteImage from '@/components/RemoteImage';
 
 const CreateHeroScreen = () => {
 
 
     const [name, setName] = useState('');
     const [level, setLevel] = useState('');
-    const [clas, setClas] = useState('');
+    const [clas, setClas] = useState<string | null>('');
     const [backstory, setBackstory] = useState('');
     const [errors, setErrors] = useState('');
     const [image, setImage] = useState<string | null> ('');
@@ -104,14 +105,16 @@ if (updatingHero) {
         return true;
     }
 
-    const onUpdate = () => {
+    const onUpdate = async () => {
         if (!validateInput()) {
             return;
         }
         //console.warn('Updated a hero!', {name});
 
+        const imagePath = await uploadImage();
+
         updateHero(
-            { id, name, level: parseInt(level), clas, backstory },
+            { id, name, level: parseInt(level), clas, backstory, image: imagePath },
             {
             onSuccess: () => {
                 resetFields();
@@ -178,7 +181,7 @@ if (updatingHero) {
         let result = await ImagePicker.launchImageLibraryAsync({
           mediaTypes: ImagePicker.MediaTypeOptions.Images,
           allowsEditing: true,
-          aspect: [4, 3],
+          aspect: [1, 1],
           quality: 1,
         });
     
@@ -195,7 +198,10 @@ if (updatingHero) {
             <Stack.Screen options={{ title: isUpdating ? "Edytuj Postać" : "Dodaj postać"}} />
 
             <View style={styles.imagecontainer}>
-                <Image source={image ? { uri: image } : defaultHeroImage}  style={styles.image} resizeMode="contain" />
+                <RemoteImage
+                path = {image}
+                fallback = {defaultHeroImage}
+                style={styles.image} resizeMode="contain" />
             </View>
             <Text onPress={pickImage} style={styles.textButton}>Wybierz obraz</Text>
 
@@ -236,7 +242,7 @@ if (updatingHero) {
 
             <Text style = {{ color: 'red'}}>{errors}</Text>
 
-            <Button text={ isUpdating ? "Zatwierdź zmiany" : 'Stwórz postać'} onPress={onCreate} />
+            <Button text={ isUpdating ? "Zatwierdź zmiany" : 'Stwórz postać'} onPress={onSubmit} />
 
             {isUpdating && <Text onPress={confirmDelete} style={styles.textButton}>Usuń postać</Text>}
 

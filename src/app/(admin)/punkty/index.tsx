@@ -12,8 +12,11 @@ const index = () => {
       <Link href={'/(admin)/punkty/kalendarz'} asChild>
         <Button text="Kalendarz" />
       </Link>
-      <Link href={'/index'} asChild>
-        <Button text="do domu" />
+      <Link href={'/(admin)/punkty/animacje'} asChild>
+        <Button text="Animacje" />
+      </Link>
+      <Link href={'/(admin)/punkty/sensor_test'} asChild>
+        <Button text="Sensor" />
       </Link>
 
     </View>

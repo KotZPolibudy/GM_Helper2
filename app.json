@@ -26,8 +26,11 @@
       },
       "permissions": [
         "READ_CALENDAR",
-        "WRITE_CALENDAR"
-      ]
+        "WRITE_CALENDAR",
+        "android.permission.READ_CALENDAR",
+        "android.permission.WRITE_CALENDAR"
+      ],
+      "package": "com.kotzpolibudy.GM_Projekt2"
     },
     "web": {
       "bundler": "metro",
@@ -50,6 +53,14 @@
     "experiments": {
       "typedRoutes": true,
       "tsconfigPaths": true
+    },
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "2eb09b9c-7d68-4ffb-963e-a0320b4f6557"
+      }
     }
   }
 }
