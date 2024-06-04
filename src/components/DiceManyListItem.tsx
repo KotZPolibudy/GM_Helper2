@@ -3,29 +3,46 @@ import Colors from '@/constants/Colors';
 import diceImages from '@assets/diceImages';
 import { Die } from '@/types';
 import { useState } from 'react';
+import { FontAwesome } from '@expo/vector-icons';
 
 type DiceListItemProps = {
     die: Die,
+    quantity: number,
+    updateQuantity: (id: number, delta: number) => void,
 }
 
 export const defaultDieImage = require('@assets/dice_Images/defaultdice.jpg');
-
 const screenWidth = Dimensions.get('window').width;
 
-const DiceListItem = ({ die }: DiceListItemProps) => {
+const DiceManyListItem = ({ die, quantity, updateQuantity }: DiceListItemProps) => {
     const dieImage = diceImages[die.image as keyof typeof diceImages] || defaultDieImage;
-    const [fudgeResults, setFudgeResults] = useState<number[]>([]);
-    
 
     return (
-        <Pressable style={styles.container}>
+        <View style={styles.container}>
             <Image style={styles.image} source={dieImage} resizeMode="cover" />
-            <Text style={styles.title}>{die.name}</Text>
-        </Pressable>
+            <View style={{ flex: 1 }}>
+                <Text style={styles.title}>{die.name}</Text>
+            </View>
+            <View style={styles.quantitySelector}>
+                <FontAwesome
+                    onPress={() => updateQuantity(die.id, -1)}
+                    name="minus"
+                    color="gray"
+                    style={{ padding: 5 }}
+                />
+                <Text style={styles.quantity}>{quantity}</Text>
+                <FontAwesome
+                    onPress={() => updateQuantity(die.id, 1)}
+                    name="plus"
+                    color="gray"
+                    style={{ padding: 5 }}
+                />
+            </View>
+        </View>
     );
 }
 
-export default DiceListItem;
+export default DiceManyListItem;
 
 const styles = StyleSheet.create({
     container: {
@@ -48,5 +65,19 @@ const styles = StyleSheet.create({
         width: '100%',
         height: 100, // Fixed height for the images
         borderRadius: 10,
-    }
+    },
+    subtitleContainer: {
+
+    },
+    quantitySelector: {
+        flexDirection: 'row',
+        alignItems: 'center',
+    },
+    price: {
+
+    },
+    quantity: {
+        marginHorizontal: 10,
+        fontSize: 18,
+    },
 });

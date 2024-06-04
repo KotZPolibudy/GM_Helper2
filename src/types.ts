@@ -53,3 +53,11 @@ export type Die = {
   name: string,
   range: number,
 };
+
+export type DieBucketItem = {
+  id: number,
+  image: string,
+  name: string,
+  range: number,
+  quantity: number,
+}

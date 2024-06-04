@@ -2,14 +2,17 @@ import { View, FlatList, Text, Alert, Pressable, StyleSheet } from 'react-native
 import dice from '@assets/data/dice';
 import DiceListItem from '@/components/DiceListItem';
 import Colors from '@/constants/Colors';
+import { Link, Stack } from 'expo-router';
 
 export default function DiceListScreen() {
 
 
   const renderFooter = () => (
-    <Pressable style={styles.customButton} onPress={() => Alert.alert('Przenieś na ekran rzucania wiaderkiem')}>
+    <Link href={'/(user)/kostki/throw_many'} asChild>
+    <Pressable style={styles.customButton}>
       <Text style={styles.customButtonText}>Rzuć wiele</Text>
     </Pressable>
+    </Link>
   );
 
 
