@@ -6,6 +6,7 @@ import heroImages from '@assets/heroImages';
 import { defaultHeroImage } from '@/components/HeroListItem';
 import Button from '@/components/Button';
 import { useHero } from '@/app/api/heroes';
+import RemoteImage from '@/components/RemoteImage';
 
 const screenWidth = Dimensions.get('window').width;
 
@@ -31,7 +32,9 @@ const HeroDetailsScreen = () => {
             <Stack.Screen options={{ title: 'Szczegóły - ' + hero.name }} />
             
             <View style={styles.container}>
-                <Image style={styles.image} source={heroImage} resizeMode="cover" />
+                <RemoteImage path={hero.image}
+                fallback={defaultHeroImage}
+                style={styles.image} resizeMode="cover" />
             </View>
 
             <Text style={styles.name}>{hero.name}</Text>

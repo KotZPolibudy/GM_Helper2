@@ -6,6 +6,10 @@ import Colors from '@/constants/Colors';
 import * as ImagePicker from 'expo-image-picker';
 import { Stack, useLocalSearchParams, useRouter } from 'expo-router';
 import { useHero, useInsertHero, useUpdateHero, useDeleteHero } from '@/app/api/heroes';
+import { randomUUID } from 'expo-crypto';
+import * as FileSystem from 'expo-file-system';
+import { decode } from 'base64-arraybuffer';
+import { supabase } from '@/lib/supabase';
 
 const CreateHeroScreen = () => {
 
@@ -53,13 +57,15 @@ if (updatingHero) {
         setErrors('');
     }
 
-    const onCreate = () => {
+    const onCreate = async () => {
         if (!validateInput()) {
             return;
         }
-        console.warn('Created a hero!', {name});
 
-        insertHero({name, level: parseInt(level), image, backstory, clas },
+        const imagePath = await uploadImage();
+
+        //console.warn('Created a hero!', {name});
+        insertHero({name, level: parseInt(level), image: imagePath, backstory, clas },
         {
             onSuccess: () => {
                 resetFields();
@@ -102,7 +108,7 @@ if (updatingHero) {
         if (!validateInput()) {
             return;
         }
-        console.warn('Updated a hero!', {name});
+        //console.warn('Updated a hero!', {name});
 
         updateHero(
             { id, name, level: parseInt(level), clas, backstory },
@@ -125,7 +131,7 @@ if (updatingHero) {
 
 
     const onDelete = () => {
-        console.warn('USUWAMYY!')
+        //console.warn('USUWAMYY!')
         deleteHero( id, {onSuccess:() => {
             resetFields();
             router.replace('/(admin)');
@@ -144,6 +150,27 @@ if (updatingHero) {
             }
         ])
     }
+
+    const uploadImage = async () => {
+        if (!image?.startsWith('file://')) {
+          return;
+        }
+      
+        const base64 = await FileSystem.readAsStringAsync(image, {
+          encoding: 'base64',
+        });
+        const filePath = `${randomUUID()}.png`;
+        const contentType = 'image/png';
+        const { data, error } = await supabase.storage
+          .from('hero-images')
+          .upload(filePath, decode(base64), { contentType });
+
+
+      
+        if (data) {
+          return data.path;
+        }
+      };
 
 
     const pickImage = async () => {

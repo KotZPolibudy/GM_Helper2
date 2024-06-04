@@ -44,7 +44,7 @@ export default function TabLayout() {
         options={{
           title: 'Lista Postaci',
           headerShown: false,
-          tabBarIcon: ({ color }) => <TabBarIcon name="user" color={color} />,
+          tabBarIcon: ({ color }) => <TabBarIcon name="users" color={color} />,
         }}
       />
       <Tabs.Screen

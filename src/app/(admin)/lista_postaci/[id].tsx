@@ -7,6 +7,7 @@ import { defaultHeroImage } from '@/components/HeroListItem';
 import Button from '@/components/Button';
 import { FontAwesome } from '@expo/vector-icons';
 import { useHero } from '@/app/api/heroes';
+import RemoteImage from '@/components/RemoteImage';
 
 const screenWidth = Dimensions.get('window').width;
 
@@ -54,7 +55,10 @@ const HeroDetailsScreen = () => {
 
             
             <View style={styles.container}>
-                <Image style={styles.image} source={heroImage} resizeMode="cover" />
+                <RemoteImage 
+                path={hero.image}
+                fallback = {defaultHeroImage}
+                style={styles.image} resizeMode="cover" />
             </View>
 
             <Text style={styles.name}>{hero.name}</Text>

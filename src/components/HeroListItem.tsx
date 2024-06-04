@@ -3,22 +3,33 @@ import Colors from '@/constants/Colors';
 import { Hero } from '@/types';
 import heroImages from '@assets/heroImages';
 import { Link, useSegments } from 'expo-router';
+import RemoteImage from './RemoteImage';
 
 type HeroListItemProps = {
     hero: Hero,
 }
 
-export const defaultHeroImage = require('@assets/heroimages/default.png');
+//export const defaultHeroImage = require('@assets/heroimages/default.png');
+//export const defaultHeroImage = 'https://notjustdev-dummy.s3.us-east-2.amazonaws.com/food/default.png';
+export const defaultHeroImage = 'https://naklejamy.com/img-preview/aHR0cHM6Ly9hczEuZnRjZG4ubmV0L3YyL2pwZy8wNi83OS8wOS85Ni8xMDAwX0ZfNjc5MDk5NjQzX0xnSWRCM3laSVZRaVdlclBEMVh4TGVLNE1kUnZINmRVLmpwZw==?&w=315&h=471&e=none&f=none&r=0&m=1'
 
 const screenWidth = Dimensions.get('window').width;
 
 const HeroListItem = ({ hero }: HeroListItemProps) => {
-    const heroImage = hero.image ? heroImages[hero.image] || defaultHeroImage : defaultHeroImage;
+    //const heroImage = hero.image ? heroImages[hero.image] || defaultHeroImage : defaultHeroImage;
     const segments = useSegments();
     return (
         <Link href={`${segments[0]}/lista_postaci/${hero.id}`} asChild>
         <Pressable style={styles.container}>
-            <Image style={styles.image} source={heroImage} resizeMode="cover" />
+
+            <RemoteImage
+                path = {hero.image}
+                fallback = {defaultHeroImage}
+                style={styles.image}
+                resizeMode="contain"
+                />
+
+
             <Text style={styles.title}> {hero.name} </Text>
             <Text style={styles.level}>Level: {hero.level} </Text>
         </Pressable>
