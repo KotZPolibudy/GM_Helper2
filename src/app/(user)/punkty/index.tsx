@@ -2,6 +2,7 @@ import { View, Text } from 'react-native';
 import React from 'react';
 import Button from '@components/Button';
 import { Link } from 'expo-router';
+import {supabase} from '@/lib/supabase';
 
 const index = () => {
   return (
@@ -12,9 +13,11 @@ const index = () => {
       <Link href={'/(user)/punkty/kalendarz'} asChild>
         <Button text="Kalendarz" />
       </Link>
-      <Link href={'/index'} asChild>
+      <Link href={'/'} asChild>
         <Button text="do domu" />
       </Link>
+
+      <Button onPress={() => supabase.auth.signOut()} text="Wyloguj" />
 
     </View>
   );
