@@ -44,7 +44,8 @@
           "calendarPermission": "The app needs to access your calendar.",
           "reminderPermission": "The app needs to access your reminders."
         }
-      ]
+      ],
+      "expo-secure-store"
     ],
     "experiments": {
       "typedRoutes": true,

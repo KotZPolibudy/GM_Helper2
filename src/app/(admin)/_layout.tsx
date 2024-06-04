@@ -50,14 +50,15 @@ export default function TabLayout() {
         }}
       />
 
-      <Tabs.Screen
-        name="kostki/index"
+<Tabs.Screen
+        name="kostki"
         options={{
-          title: 'Kostki!',
+          title: 'Kostki',
           headerShown: false,
           tabBarIcon: ({ color }) => <TabBarIcon name="diamond" color={color} />,
         }}
       />
+
 
 <Tabs.Screen
         name="punkty"
@@ -67,6 +68,7 @@ export default function TabLayout() {
           tabBarIcon: ({ color }) => <TabBarIcon name="dollar" color={color} />,
         }}
       />
+
 
 <Tabs.Screen
         name="profile"

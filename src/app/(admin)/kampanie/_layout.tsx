@@ -3,7 +3,8 @@ import { Stack } from "expo-router";
 export default function CampMenuStack() {
     return (
         <Stack>
-            <Stack.Screen name="index" options={{ title: 'Kampanie'}} />
+            {/*<Stack.Screen name="index" options={{ title: 'Kampanie'}} />*/}
+            <Stack.Screen name="list" options={{ headerShown: false}} />
         </Stack>
     )
 }
