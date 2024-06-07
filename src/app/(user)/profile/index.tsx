@@ -4,6 +4,7 @@ import Button from '@components/Button';
 import { Link } from 'expo-router';
 import { supabase } from '@/lib/supabase';
 
+
 const index = () => {
   return (
     <View style={{ flex: 1, justifyContent: 'center', padding: 10 }}>

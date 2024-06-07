@@ -32,7 +32,7 @@ const SignInScreen = () => {
       <TextInput
         value={email}
         onChangeText={setEmail}
-        placeholder="jon@gmail.com"
+        placeholder="przyklad@gmail.com"
         style={styles.input}
       />
 

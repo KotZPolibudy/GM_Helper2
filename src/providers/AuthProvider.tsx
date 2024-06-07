@@ -35,6 +35,7 @@ useEffect(() => {
               .eq('id', session.user.id)
               .single();
             setProfile(data || null);
+            console.log(profile);
           }
     
           setLoading(false);
@@ -49,7 +50,8 @@ useEffect(() => {
 }, []);
 
 
-
+    
+    // <AuthContext.Provider value={{ session, loading, profile, isAdmin: profile?.group == "ADMIN" }}>{children}</AuthContext.Provider>
     return (
         <AuthContext.Provider value={{ session, loading, profile, isAdmin: profile?.group == "ADMIN" }}>{children}</AuthContext.Provider>
     );
