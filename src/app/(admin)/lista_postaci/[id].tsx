@@ -17,7 +17,7 @@ const HeroDetailsScreen = () => {
     const {data: hero, error, isLoading } = useHero(id);
     
     if (!hero) {
-        return <Text>Nie udało się załadować postaci z bazy danych</Text>;
+        return <Text>Niestety nie udało się załadować postaci z bazy danych</Text>;
     }
 
     const heroImage = hero.image ? heroImages[hero.image] || defaultHeroImage : defaultHeroImage;
