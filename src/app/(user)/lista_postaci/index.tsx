@@ -2,6 +2,7 @@ import { View, FlatList, ActivityIndicator, Text } from 'react-native';
 //import heroes from '@assets/data/heroes';
 import HeroListItem from '@/components/HeroListItem';
 import { useHeroesList } from '@/app/api/heroes';
+import { Stack } from 'expo-router';
 
 export default function HeroListScreen() {
 
@@ -14,6 +15,8 @@ const { data: heroes, error, isLoading } = useHeroesList();
   }
 
   return (
+    <View>
+      <Stack.Screen options={{ title: 'Lista postaci' }} />
     <FlatList
       data={heroes}
       renderItem={({ item }) => <HeroListItem hero={item} />}
@@ -21,5 +24,6 @@ const { data: heroes, error, isLoading } = useHeroesList();
       keyExtractor={(item) => item.id.toString()}
       numColumns={1}
     />
+    </View>
   );
 }

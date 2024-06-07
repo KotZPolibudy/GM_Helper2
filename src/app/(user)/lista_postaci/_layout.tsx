@@ -7,6 +7,7 @@ import Colors from "@/constants/Colors";
 export default function HeroStack () {
     return( 
     <Stack screenOptions={{
+        title: 'Lista Postaci',
         headerRight: () => (
             <Link href="/modal" asChild>
               <Pressable>

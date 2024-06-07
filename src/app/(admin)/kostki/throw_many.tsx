@@ -77,7 +77,7 @@ const DiceList = () => {
 
   useFocusEffect(
     useCallback(() => {
-      Accelerometer.setUpdateInterval(16); // około 60 aktualizacji na sekundę
+      Accelerometer.setUpdateInterval(16); // parametr jak często słucha
       const subscription = Accelerometer.addListener(handleShake);
       setSubscription(() => subscription);
 

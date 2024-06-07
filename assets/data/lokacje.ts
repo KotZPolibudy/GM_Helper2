@@ -1,6 +1,6 @@
 const locationsOfInterest = [
     {
-      title: 'First',
+      title: 'Losowy marker',
       location: {
         latitude: 10,
         longitude: 10
@@ -8,7 +8,7 @@ const locationsOfInterest = [
       description: 'marker 10/10'
     },
     {
-      title: 'Second',
+      title: 'Norbert',
       location: {
         latitude: 50,
         longitude: 20

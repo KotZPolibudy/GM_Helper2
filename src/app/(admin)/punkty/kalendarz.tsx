@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, View, Text, Button, FlatList, Platform, Alert } from 'react-native';
+import { StyleSheet, View, Text, Button, FlatList, Platform, Alert, TouchableOpacity } from 'react-native';
 import * as Calendar from 'expo-calendar';
 
 export default function App() {
@@ -32,6 +32,35 @@ export default function App() {
     Alert.alert(`Your new calendar ID is: ${newCalendarID}`);
   };
 
+  const confirmDeleteCalendar = (calendarId) => {
+    Alert.alert(
+      'Confirm Delete',
+      'Are you sure you want to delete this calendar?',
+      [
+        {
+          text: 'Cancel',
+          style: 'cancel',
+        },
+        {
+          text: 'Delete',
+          onPress: () => deleteCalendar(calendarId),
+          style: 'destructive',
+        },
+      ],
+      { cancelable: false }
+    );
+  };
+
+  const deleteCalendar = async (calendarId) => {
+    try {
+      await Calendar.deleteCalendarAsync(calendarId);
+      Alert.alert('Calendar deleted successfully');
+      setCalendars((calendars) => calendars.filter((calendar) => calendar.id !== calendarId));
+    } catch (error) {
+      Alert.alert('Error deleting calendar', error.message);
+    }
+  };
+
   async function getDefaultCalendarSource() {
     const defaultCalendar = await Calendar.getDefaultCalendarAsync();
     return defaultCalendar.source;
@@ -42,6 +71,7 @@ export default function App() {
       <Text style={styles.calendarTitle}>{item.title}</Text>
       <Text>{item.source.name}</Text>
       <Text>{item.source.type}</Text>
+      <Button title="Delete" onPress={() => confirmDeleteCalendar(item.id)} />
     </View>
   );
 
